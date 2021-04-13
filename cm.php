@@ -22,12 +22,25 @@ if(!$conn){
 $result=oci_parse($conn,$que);
 oci_execute($result);
 $i=1;
+$data1=array();
 $data=array();
 while (($row = oci_fetch_array($result, OCI_NUM)) != false) {
     $arrayName = array("label" =>"$row[1]" ,"y"=>$row[0]);
-    array_push($data,$arrayName);
+    array_push($data1,$arrayName);
     $i++;
 }
+array_push($data,$data1[3]);
+array_push($data,$data1[4]);
+array_push($data,$data1[0]);
+array_push($data,$data1[5]);
+array_push($data,$data1[6]);
+array_push($data,$data1[10]);
+array_push($data,$data1[1]);
+array_push($data,$data1[9]);
+array_push($data,$data1[2]);
+array_push($data,$data1[8]);
+array_push($data,$data1[7]);
+array_push($data,$data1[11]);
 oci_free_statement($result);
 oci_close($conn);
 ?>

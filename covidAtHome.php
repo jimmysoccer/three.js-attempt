@@ -33,6 +33,33 @@ while (($row = oci_fetch_array($result, OCI_NUM)) != false) {
     array_push($data,$arrayName);
     $i++;
 }
+$que = "SELECT D.D_MONTH, D.D_YEAR, SUM(C.CASES_TOTAL)
+FROM \"G.AGRAWAL\".\"COVID_CASES\" C, \"G.AGRAWAL\".\"DATEVALUES\" D
+WHERE C.D_ID=D.D_ID
+GROUP BY D.D_MONTH, D.D_YEAR
+ORDER BY D.D_MONTH, D.D_YEAR";
+$result=oci_parse($conn,$que);
+oci_execute($result);
+$data1=array();
+$total=array();
+while (($row = oci_fetch_array($result, OCI_NUM)) != false) {
+    $temp=$row[1] . $row[0];
+    $arrayName = array("label" =>"$temp" ,"y"=>$row[2]);
+    array_push($data1,$arrayName);
+    $i++;
+}
+array_push($total,$data1[3]);
+array_push($total,$data1[7]);
+array_push($total,$data1[0]);
+array_push($total,$data1[8]);
+array_push($total,$data1[6]);
+array_push($total,$data1[5]);
+array_push($total,$data1[1]);
+array_push($total,$data1[11]);
+array_push($total,$data1[10]);
+array_push($total,$data1[9]);
+array_push($total,$data1[2]);
+array_push($total,$data1[4]);
 oci_free_statement($result);
 oci_close($conn);
 ?>
@@ -53,18 +80,36 @@ var chart = new CanvasJS.Chart("chartContainer", {
 	},
 	axisY:{
 		includeZero: true,
-    title:"Cases"
+    title:"Cases",
+    titleFontColor: "#4F81BC",
+		lineColor: "#4F81BC",
+		labelFontColor: "#4F81BC",
+		tickColor: "#4F81BC"
 	},
+  axisY2:{
+    title:"total cases",
+    titleFontColor: "#5A5757",
+		lineColor: "#5A5757",
+		labelFontColor: "#5A5757",
+		tickColor: "#5A5757"
+  }
+  ,
   axisX:{
     title:"Year/Month"
   },
 	data: [{
 		type: "column", //change type to bar, line, area, pie, etc
 		//indexLabel: "{y}", //Shows y value on all Data Points
-		indexLabelFontColor: "#5A5757",
-		indexLabelPlacement: "outside",
+    name:"cases at home",
+    showInLegend:true,
 		dataPoints: <?php echo json_encode($data, JSON_NUMERIC_CHECK); ?>
-	}]
+	},{
+    type:"line",
+		axisYType: "secondary",
+    name:"total cases",
+    showInLegend:true,
+    dataPoints: <?php echo json_encode($total, JSON_NUMERIC_CHECK); ?>
+  }]
 });
 chart.render();
 

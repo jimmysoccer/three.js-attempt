@@ -5,7 +5,7 @@ $password= "092700Jimmy";
 $que = "SELECT SUM(L.EMPLOYEMENT), D.D_YEAR
 FROM \"G.AGRAWAL\".\"LABOR_DATA\" L, \"G.AGRAWAL\".\"DATEVALUES\" D
 WHERE L.D_ID=D.D_ID
-GROUP BY D.D_YEAR";
+GROUP BY D.D_YEAR ORDER BY D.D_YEAR";
 $conn=oci_connect($nis,$password,
 'oracle.cise.ufl.edu:1521/orcl');
 if(empty($nis) or empty($password)){

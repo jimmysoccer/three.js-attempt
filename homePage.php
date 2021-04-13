@@ -6,6 +6,30 @@
     <h1>Home Page</h1>
   </header>
   <div class="form" align="center">
+    Raw Data<br>
+      <form action="rawLaborData.php">
+        <button type="submit" style="margin:5px">
+          Raw Labor Data</button>
+      </form>
+      <form action="rawCovidData.php">
+        <button type="submit" style="margin:5px">
+          Raw Covid Data</button>
+      </form>
+      <form action="rawDeathData.php">
+        <button type="submit" style="margin:5px">
+          Raw Deaths Data</button>
+      </form>
+      <form action="rawHosData.php">
+        <button type="submit" style="margin:5px">
+          Raw Covid Hospitalization Data</button>
+      </form>
+      <form action="rawCrimeData.php">
+        <button type="submit" style="margin:5px">
+          Raw Crime Data</button>
+      </form>
+  </div>
+  <div class="form" align="center">
+    Labor Data<br>
       <form action="complete.php">
         <button type="submit" style="margin:5px">
           Complete Labor Data</button>
@@ -21,6 +45,7 @@
   </div>
 
   <div class="form" align="center">
+    Unemployment & Employment<br>
   <form action="um.php">
     <button type="submit" style="margin:5px">
       Unemployment Monthly</button>
@@ -40,17 +65,10 @@
 </div>
 
   <div class="form" align="center">
-    <form action="laborDataYearly.php">
-      <button type="submit" style="margin:5px">
-        Covid Cases</button>
-    </form>
-    <form action="cm.php">
-      <button type="submit" style="margin:5px">
-        Covid Monthly</button>
-    </form>
+    Covid Data <br>
     <form action="cmy.php">
       <button type="submit" style="margin:5px">
-        Covid Cases VS Month and Year</button>
+        Covid Cases Monthly</button>
     </form>
   </div>
 
@@ -69,7 +87,7 @@
       <button type="submit" style="margin:5px">Survive VS Death Cases</button>
     </form>
   </div>
-  
+
   <div class="form" align="center">
     <form action="covidAge.php">
       <button type="submit" style="margin:5px">
