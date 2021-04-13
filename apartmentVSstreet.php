@@ -2,14 +2,29 @@
 <?php
 $nis = "hesun";
 $password= "092700Jimmy";
-$que = "SELECT G.A AS \"SURVIVED\", G.F AS \"DEATHS\", D.D_MONTH, D.D_YEAR
+$que = "SELECT F.A AS \"TOTAL CRIME\", G.B AS \"APARTMENT ARREST\", J.K AS \"STREET ARREST\", D.D_MONTH, D.D_YEAR
 FROM \"G.AGRAWAL\".\"DATEVALUES\" D,
-(SELECT (SUM(C.CASES_TOTAL)-SUM(D.DEATHS_TOTAL)) AS A, SUM(D.DEATHS_TOTAL) AS F, T.D_ID AS B
-FROM \"G.AGRAWAL\".\"COVID_CASES\" C, \"G.AGRAWAL\".\"COVID_DEATHS\" D, \"G.AGRAWAL\".\"DATEVALUES\" T
-WHERE C.D_ID=T.D_ID
-AND D.D_ID=T.D_ID
-GROUP BY T.D_ID)G
-WHERE G.B=D.D_ID";
+(SELECT COUNT(C.C_ID) AS A, H.D_ID
+FROM \"G.AGRAWAL\".\"CRIME\" C, \"G.AGRAWAL\".\"HAPPENS_AT\" H
+WHERE (C.LOCATION_DESCRIPTION='APARTMENT' OR C.LOCATION_DESCRIPTION='STREET')
+AND C.C_ID=H.C_ID
+GROUP BY H.D_ID)F,
+(SELECT COUNT(C.ARREST) AS B, H.D_ID
+FROM \"G.AGRAWAL\".\"CRIME\" C, \"G.AGRAWAL\".\"HAPPENS_AT\" H
+WHERE C.LOCATION_DESCRIPTION='APARTMENT'
+AND C.ARREST='true'
+AND C.C_ID=H.C_ID
+GROUP BY H.D_ID)G,
+(SELECT COUNT(C.ARREST) AS K, H.D_ID
+FROM \"G.AGRAWAL\".\"CRIME\" C, \"G.AGRAWAL\".\"HAPPENS_AT\" H
+WHERE C.LOCATION_DESCRIPTION='STREET'
+AND C.ARREST='true'
+AND C.C_ID=H.C_ID
+GROUP BY H.D_ID)J
+WHERE G.D_ID=D.D_ID
+AND F.D_ID=D.D_ID
+AND J.D_ID=D.D_ID
+ORDER BY D.D_ID";
 $conn=oci_connect($nis,$password,
 'oracle.cise.ufl.edu:1521/orcl');
 if(empty($nis) or empty($password)){
@@ -31,37 +46,19 @@ if(!$conn){
 $result=oci_parse($conn,$que);
 oci_execute($result);
 $i=1;
-$data=array();
-$death=array();
-while (($row = oci_fetch_array($result, OCI_NUM)) != false) {
-    $temp=$row[3] . $row[2];
-    $arrayName = array("label" =>"$temp" ,"y"=>$row[0]);
-    $arrayName1 = array("label" =>"$temp" ,"y"=>$row[1]);
-    array_push($data,$arrayName);
-    array_push($death,$arrayName1);
-    $i++;
-}
-$que = "SELECT G.A AS \"SURVIVED\", G.F AS \"DEATHS\",ROUND(G.M,2) AS \"MORTALITY RATE PER 1000 PEOPLE\", D.D_MONTH, D.D_YEAR
-FROM \"G.AGRAWAL\".\"DATEVALUES\" D,
-(SELECT
-(SUM(C.CASES_TOTAL)-SUM(D.DEATHS_TOTAL)) AS A,
- SUM(D.DEATHS_TOTAL) AS F,
- (SUM(D.DEATHS_TOTAL)/SUM(C.CASES_TOTAL)*1000) AS M,
- T.D_ID AS B
-FROM \"G.AGRAWAL\".\"COVID_CASES\" C, \"G.AGRAWAL\".\"COVID_DEATHS\" D, \"G.AGRAWAL\".\"DATEVALUES\" T
-WHERE C.D_ID=T.D_ID
-AND D.D_ID=T.D_ID
-GROUP BY T.D_ID)G
-WHERE G.B=D.D_ID";
-$result=oci_parse($conn,$que);
-oci_execute($result);
-$rate=array();
+$apart=array();
+$street=array();
+$total=array();
 while (($row = oci_fetch_array($result, OCI_NUM)) != false) {
     $temp=$row[4] . $row[3];
-    $arrayName = array("label" =>"$temp" ,"y"=>$row[2]);
-    array_push($rate,$arrayName);
+    $arrayName = array("label" =>"$temp" ,"y"=>$row[0]);
+    $arrayName1 = array("label" =>"$temp" ,"y"=>$row[1]);
+    $arrayName2 = array("label" =>"$temp" ,"y"=>$row[2]);
+    array_push($total,$arrayName);
+    array_push($apart,$arrayName1);
+    array_push($street,$arrayName2);
+    $i++;
 }
-
 oci_free_statement($result);
 oci_close($conn);
 ?>
@@ -78,27 +75,21 @@ var chart = new CanvasJS.Chart("chartContainer", {
   zoonEnabled:true,
 	theme: "light1", // "light1", "light2", "dark1", "dark2"
 	title:{
-		text: "Survive VS Death Cases"
+		text: "Apartment Arrest VS Street Arrest"
 	},
   axisX:{
     title: "Year/Month"
   }
   ,
-	axisY: [{
-		title: "Survived Cases",
+	axisY: {
+		title: "Arrests",
     titleFontColor: "#4F81BC",
 		lineColor: "#4F81BC",
 		labelFontColor: "#4F81BC",
 		tickColor: "#4F81BC"
-	},{
-    title:"Death cases",
-    titleFontColor: "#C0504E",
-		lineColor: "#C0504E",
-		labelFontColor: "#C0504E",
-		tickColor: "#C0504E"
-  }],
+	},
   axisY2:{
-    title:"Mortality Rate",
+    title:"Total Arrests",
     titleFontColor: "#9ACD32",
 		lineColor: "#9ACD32",
 		labelFontColor: "#9ACD32",
@@ -106,26 +97,26 @@ var chart = new CanvasJS.Chart("chartContainer", {
   },
 	data: [{
 		type: "line",
-    name:"Survived",
+    name:"Apartment",
     axisYIndex:0,
     markerSize:0,
 		showInLegend: true,
-		dataPoints: <?php echo json_encode($data, JSON_NUMERIC_CHECK); ?>
+		dataPoints: <?php echo json_encode($apart, JSON_NUMERIC_CHECK); ?>
 	},{
     type: "line",
-    name:"Death",
+    name:"Street",
     axisYIndex:1,
 		markerSize: 0,
 		showInLegend: true,
-		dataPoints: <?php echo json_encode($death, JSON_NUMERIC_CHECK); ?>
+		dataPoints: <?php echo json_encode($street, JSON_NUMERIC_CHECK); ?>
   },{
     type: "line",
-    name:"Mortality Rate",
+    name:"Total Arrest",
     axisYType:"secondary",
     lineColor:"#9ACD32",
 		markerSize: 0,
 		showInLegend: true,
-		dataPoints: <?php echo json_encode($rate, JSON_NUMERIC_CHECK); ?>
+		dataPoints: <?php echo json_encode($total, JSON_NUMERIC_CHECK); ?>
   }]
 });
 chart.render();

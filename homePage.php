@@ -93,5 +93,20 @@
       <button type="submit" style="margin:5px">
         Covid Filter By Age</button>
     </form>
+    <form action="monthlyArrest.php">
+      <button type="submit" style="margin:5px">
+        MONTHLY ARRESTS IN THE DISTRICT WITH HIGHEST CRIME</button>
+    </form>
+    <form action="apartmentVSstreet.php">
+      <button type="submit" style="margin:5px">
+        Apartment Arrest VS Street Arrest</button>
+    </form>
+  </div>
+
+  <div class="form" align="center">
+    <form action="totalVSdomestic.php">
+      <button type="submit" style="margin:5px">
+        Total Arrests VS Domestic Arrests</button>
+    </form>
   </div>
 </html>
