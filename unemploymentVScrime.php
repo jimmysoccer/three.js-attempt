@@ -93,7 +93,13 @@ chart.render();
 <body>
 <div id="chartContainer" style="height: 370px; width: 100%;"></div>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-
+<h2>Conclusion</h2>
+Here we can observe that over the years, the unemployment trend as well as the Crime cases trend has been quite consistent
+till January 2020, i.e. till the covid pandemic hit. The general trend of the crimes cases is that they peak every year around
+the summer , i.e. around July, and then go on to decrease as the holiday seasons approach, i.e. around November and December,
+and then again starts increasing the next year. We can see that the unemployment trend has no such similarity and hence can
+conclude that there is no relation between the Crimes and Unemployment. What is interesting is the fact that when when Crime
+cases dropped after the pandemic hit, It still followed the same trend discussed above.
 <br><br>
 </body>
 <div align="center">

@@ -3,7 +3,7 @@
 </style>
 <html>
   <header>
-    <h1>Home Page</h1>
+    <h1>Affects of Covid-19 on Crime and Unemployment in the City of Chicago</h1>
   </header>
   <div class="form" align="center">
     <form action="diagram.php">
@@ -11,31 +11,6 @@
         Relational Schema Diagram</button>
     </form>
   </div>
-  <!--
-  <div class="form" align="center">
-    Raw Data<br>
-      <form action="rawLaborData.php">
-        <button type="submit" style="margin:5px">
-          Raw Labor Data</button>
-      </form>
-      <form action="rawCovidData.php">
-        <button type="submit" style="margin:5px">
-          Raw Covid Data</button>
-      </form>
-      <form action="rawDeathData.php">
-        <button type="submit" style="margin:5px">
-          Raw Deaths Data</button>
-      </form>
-      <form action="rawHosData.php">
-        <button type="submit" style="margin:5px">
-          Raw Covid Hospitalization Data</button>
-      </form>
-      <form action="rawCrimeData.php">
-        <button type="submit" style="margin:5px">
-          Raw Crime Data</button>
-      </form>
-  </div>
--->
   <div class="form" align="center">
     Labor Data<br>
       <form action="complete.php">
