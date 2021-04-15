@@ -22,11 +22,7 @@ if(!$conn){
 <html>
 <body>
 <h2>Query result</h2>
-<div align="center">
-<form method="get" action="homePage.php">
-    <button type="submit">HomePage</button>
-</form>
-</div>
+
 <?php
 $result=oci_parse($conn,$que);
 oci_execute($result);
@@ -133,8 +129,25 @@ chart.render();
 </script>
 </head>
 <body>
-<div id="chartContainer"></div>
+<div id="chartContainer">
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<div>
+<h2>Conclusion</h2>
+From the above graph, we can clearly obeserve that even though the values of all three categories are relatively very different,
+ they all follow the same trend in a manner, and are interdependent on each other. We can see that in the beginning when the covid
+ cases started coming, both, the survived cases and Death rate rose, and as soon as the total cases started droppin after june, we
+ see a steep decline in all the graphs, we can also observe that the Mortality rate has been a very balanced factor between the deaths
+  and the survived throughout the pandamic. The mortality rate shows the number of people died every 1000 people, we can see previously
+   when public was unaware of the importance of social distancing etc, they mortality rate was pretty high, but then it fell pretty
+   rapidly as the public became more aware.
+ </div>
+ <br>
+ <div align="center">
+ <form method="get" action="homePage.php">
+     <button type="submit">HomePage</button>
+ </form>
+ </div>
 </body>
-
 </html>

@@ -8,7 +8,8 @@ FROM \"G.AGRAWAL\".\"CRIME\" C, \"G.AGRAWAL\".\"LABOR_DATA\" L, \"G.AGRAWAL\".\"
 WHERE C.C_ID=H.C_ID
 AND H.D_ID=L.D_ID
 AND L.D_ID=D.D_ID
-AND D.D_YEAR>2015
+AND D.D_YEAR>2016
+AND D.D_YEAR<2021
 GROUP BY D.D_ID
 ORDER BY D.D_ID)G
 WHERE D.D_ID=G.C";
@@ -92,6 +93,8 @@ chart.render();
 <body>
 <div id="chartContainer" style="height: 370px; width: 100%;"></div>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+<br><br>
 </body>
 <div align="center">
 <form method="get" action="homePage.php">

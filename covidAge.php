@@ -148,6 +148,13 @@ chart.render();
 <body>
 <div id="chartContainer" style="height: 370px; width: 100%;"></div>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<h2>Conclusion</h2>
+This interesting graph shows us the covid cases trends for every age group throughout the year.
+It shows that even though the older generations were much more suciptible to corona virus,
+it was actually the younger generation which had the most cases, this difference can be observed
+very clearly in 2020 october, where the cases from the age group 18 - 39 is approx 27000, around twice than the
+cases for 40-59 which is approx 16000.
+<br>
 </body>
 <div align="center">
 <form method="get" action="homePage.php">

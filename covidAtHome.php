@@ -87,6 +87,7 @@ var chart = new CanvasJS.Chart("chartContainer", {
 		tickColor: "#4F81BC"
 	},
   axisY2:{
+    includeZero:true,
     title:"total cases",
     titleFontColor: "#5A5757",
 		lineColor: "#5A5757",
@@ -100,13 +101,13 @@ var chart = new CanvasJS.Chart("chartContainer", {
 	data: [{
 		type: "column", //change type to bar, line, area, pie, etc
 		//indexLabel: "{y}", //Shows y value on all Data Points
-    name:"cases at home",
+    name:"Total Cases",
     showInLegend:true,
 		dataPoints: <?php echo json_encode($data, JSON_NUMERIC_CHECK); ?>
 	},{
-    type:"line",
+    type:"spline",
 		axisYType: "secondary",
-    name:"total cases",
+    name:"Cases at Home",
     showInLegend:true,
     dataPoints: <?php echo json_encode($total, JSON_NUMERIC_CHECK); ?>
   }]
@@ -119,6 +120,14 @@ chart.render();
 <body>
 <div id="chartContainer" style="height: 370px; width: 100%;"></div>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<h2>Conclusion</h2>
+As can be seen in the graph, the number of covid cases that were treated at home and the total number of covid cases
+has been following the same trend. The only places we can observe that this is different is when the total number of
+covid cases starts to increase. This can most easily be seen for 2020 October. This shows that relatively more number
+of people got treated at home as compared to other months. For 2020 June we can see that this ratio is very less and
+so more ratio of people were hospitalised or died. This is due to the request by the government to not overcrowd the
+hospitals during the time of peak covid cases and so people adhering to it and staying at home when and if possible.
+<br><br>
 </body>
 <div align="center">
 <form method="get" action="homePage.php">

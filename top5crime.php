@@ -26,12 +26,8 @@ if(!$conn){
 ?>
 <html>
 <body>
-<h2>Raw Labor Data</h2>
-<div align="center">
-<form method="get" action="homePage.php">
-    <button type="submit">HomePage</button>
-</form>
-</div>
+<h2>Query Result</h2>
+
 <?php
 $result=oci_parse($conn,$que);
 oci_execute($result);
@@ -137,5 +133,18 @@ function toggleDataSeries(e){
 <body>
 <div id="chartContainer" style="height: 370px; width: 100%;"></div>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<h2>Conclusion</h2>
+From the above Bar Graph, we can observe that Theft has been the highest contributor to the total number of
+crimes in Chicago over the years consistently followed by Battery. This drastically changes in the year 2020
+when the world was hit by the COVID pandemic. Cases of theft dropped the most as compared to the previous numbers.
+Though the cases of Battery dropped as well, they managed to surpass the cases of theft. Even though cases of all
+kinds of crimes dropped, Asssaults, Criminal Damange and Deceptive practice were least affected. The drop in theft
+can be associated to more people staying indoors and thus giving a less chance for the robbers to commit theft. 
+<br><br>
 </body>
+<div align="center">
+<form method="get" action="homePage.php">
+    <button type="submit">HomePage</button>
+</form>
+</div>
 </html>

@@ -24,6 +24,8 @@ GROUP BY H.D_ID)J
 WHERE G.D_ID=D.D_ID
 AND F.D_ID=D.D_ID
 AND J.D_ID=D.D_ID
+AND D.D_YEAR>2016
+AND D.D_YEAR<2021
 ORDER BY D.D_ID";
 $conn=oci_connect($nis,$password,
 'oracle.cise.ufl.edu:1521/orcl');
@@ -37,11 +39,7 @@ if(!$conn){
 <html>
 <body>
 <h2>Query result</h2>
-<div align="center">
-<form method="get" action="homePage.php">
-    <button type="submit">HomePage</button>
-</form>
-</div>
+
 <?php
 $result=oci_parse($conn,$que);
 oci_execute($result);
@@ -126,6 +124,18 @@ chart.render();
 <body>
 <div id="chartContainer"></div>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<h2>Conclusion</h2>
+From the graph, we observe that apartment arrests are relatively stable compare to the street arrests and total arrests during three years.
+The reason why it is stable is that aparment is fixed and not easily affected by the outer environment. It is not too random for policeman to
+make the action. However, total arrests and street arrests have almost the same trend. When it's the beginning of the year, such as Janauary to March, total
+arrests and street arrests are the lowest during this year. That's because Thanksgiving break, Christmas break are in the begnining of the year,
+which cause the crime caese stay at a low level. Therefore, as the total crime cases decrease, the street arrests will decrease also.
 </body>
-
+<br><br>
+<div align="center">
+<form method="get" action="homePage.php">
+    <button type="submit">HomePage</button>
+</form>
+</div>
 </html>

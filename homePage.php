@@ -6,6 +6,13 @@
     <h1>Home Page</h1>
   </header>
   <div class="form" align="center">
+    <form action="diagram.php">
+      <button type="submit" style="margin:5px">
+        Relational Schema Diagram</button>
+    </form>
+  </div>
+  <!--
+  <div class="form" align="center">
     Raw Data<br>
       <form action="rawLaborData.php">
         <button type="submit" style="margin:5px">
@@ -28,6 +35,7 @@
           Raw Crime Data</button>
       </form>
   </div>
+-->
   <div class="form" align="center">
     Labor Data<br>
       <form action="complete.php">
@@ -69,6 +77,14 @@
     <form action="cmy.php">
       <button type="submit" style="margin:5px">
         Covid Cases Monthly</button>
+    </form>
+  </div>
+
+  <div class="form" align="center">
+    Crime Data <br>
+    <form action="crimeMonthly.php">
+      <button type="submit" style="margin:5px">
+        Crime Cases Monthly</button>
     </form>
   </div>
 
@@ -117,68 +133,4 @@
         Gun Related Crime Cases</button>
     </form>
   </div>
-  <div class="form" align="center">
-    Total Labor Tuples:
-    <?php
-    $nis = "hesun";
-    $password= "092700Jimmy";
-    $que = "SELECT COUNT(*) AS \"TOTAL LABOR DATA\" FROM \"G.AGRAWAL\".\"LABOR_DATA\"";
-    $conn=oci_connect($nis,$password,
-    'oracle.cise.ufl.edu:1521/orcl');
-    if(empty($nis) or empty($password)){
-        echo "UserID atau Password is empty<br>\n";}
-
-    if(!$conn){
-        echo 'connection error';
-    }
-    $result=oci_parse($conn,$que);
-    oci_execute($result);
-    while (($row = oci_fetch_array($result, OCI_NUM)) != false) {
-        echo $row[0];
-    }
-    ?>
-  </div>
-
-    <div class="form" align="center">
-      Total Crime Tuples:
-      <?php
-      $nis = "hesun";
-      $password= "092700Jimmy";
-      $que = "SELECT COUNT(*) AS \"TOTAL CRIME DATA\" FROM \"G.AGRAWAL\".\"CRIME\"";
-      $conn=oci_connect($nis,$password,
-      'oracle.cise.ufl.edu:1521/orcl');
-      if(empty($nis) or empty($password)){
-          echo "UserID atau Password is empty<br>\n";}
-
-      if(!$conn){
-          echo 'connection error';
-      }
-      $result=oci_parse($conn,$que);
-      oci_execute($result);
-      while (($row = oci_fetch_array($result, OCI_NUM)) != false) {
-          echo $row[0];
-      }
-      ?>
-    </div>
-    <div class="form" align="center">
-      Total Covid Tuples:
-      <?php
-      $nis = "hesun";
-      $password= "092700Jimmy";
-      $que = "SELECT COUNT(*) AS \"TOTAL COVID DATA\" FROM \"G.AGRAWAL\".\"COVID_CASES\"";
-      $conn=oci_connect($nis,$password,
-      'oracle.cise.ufl.edu:1521/orcl');
-      if(empty($nis) or empty($password)){
-          echo "UserID atau Password is empty<br>\n";}
-
-      if(!$conn){
-          echo 'connection error';
-      }
-      $result=oci_parse($conn,$que);
-      oci_execute($result);
-      while (($row = oci_fetch_array($result, OCI_NUM)) != false) {
-          echo $row[0];
-      }
-      ?>
-    </div>
 </html>

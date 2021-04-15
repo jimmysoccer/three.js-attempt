@@ -34,11 +34,7 @@ if(!$conn){
 <html>
 <body>
 <h2>Query result</h2>
-<div align="center">
-<form method="get" action="homePage.php">
-    <button type="submit">HomePage</button>
-</form>
-</div>
+
 <?php
 $result=oci_parse($conn,$que);
 oci_execute($result);
@@ -119,6 +115,20 @@ chart.render();
 <body>
 <div id="chartContainer"></div>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<h2>Conclusion</h2>
+As can be seen in the above graph, the number of gun related crime cases were consistent over the years
+tho they increased after the start of pandemic. The gun related crime rate can be seen decreasing during
+the holiday season every year just like the total number of cases does. Tho the gun related crime rate is
+seen decreasing over the years, it suddenly shot up when the pandemic hit in 2020. One reason for this is
+because crimes like theft decreased and so the crime rate for gun related incidents increased. Another major 
+fact for this is that instead of decreasing like all other crimes did during the pandemic, these cases remained
+the same and even increased a bit.
+<br><br>
 </body>
-
+<div align="center">
+<form method="get" action="homePage.php">
+    <button type="submit">HomePage</button>
+</form>
+</div>
 </html>

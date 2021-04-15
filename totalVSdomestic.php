@@ -17,6 +17,8 @@ AND C.ARREST='true'
 GROUP BY H.D_ID)J
 WHERE J.D_ID=D.D_ID
 AND F.D_ID=D.D_ID
+AND D.D_YEAR>2016
+AND D.D_YEAR<2021
 ORDER BY D.D_ID";
 $conn=oci_connect($nis,$password,
 'oracle.cise.ufl.edu:1521/orcl');
@@ -92,6 +94,12 @@ chart.render();
 <body>
 <div id="chartContainer" style="height: 370px; width: 100%;"></div>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<h2>Conclusion</h2>
+From the graph above, we know that domestic arrests are keep at the same level during these years. It doesn't have very huge fluctuation
+due to the time change. However, total arrests have a big fluctuation during these years. It falls and rises each month. The most notable
+fall is in Feb, Mar 2020. Due to the covid-19 virus, the public has been required to decrease the unnecessary transportation and to decrease
+face-to-face chances. Therefore, the policeman have also been affected and have to decrease the numbers of arresting crimnials.
+<br><br> 
 </body>
 <div align="center">
 <form method="get" action="homePage.php">

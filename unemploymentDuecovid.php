@@ -106,6 +106,13 @@ chart.render();
 <body>
 <div id="chartContainer" style="height: 370px; width: 100%;"></div>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<h2>Conclusion</h2>
+As we can observe from the initial phases of the graph, that is from 2019 to 2020, the unemployment number was pretty
+consistent without any signs of future changes. But as we can observe from the red line, as soon as covid struck,
+within a month or so, we can see that there was an exponential increase in unemployment and people were getting laid off due to
+panic in the industries. But as soon as work from home concept got introduced and people got comfortable with it
+and the supporting technologies, industries adapted and so unemployment rates started to go down even tho the covid cases were rising.
+<br><br>
 </body>
 <div align="center">
 <form method="get" action="homePage.php">
