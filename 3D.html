@@ -1,0 +1,109 @@
+<html>
+	<head>
+		<title>My first Three.js app</title>
+		<style>
+			body { margin: 0; }
+			canvas { width: 100%; height: 100% }
+		</style>
+		<style>
+			.element {
+				width: 120px;
+				height: 160px;
+				box-shadow: 0px 0px 12px rgba(0,255,255,0.5);
+				border: 1px solid rgba(127,255,255,0.25);
+				font-family: Helvetica, sans-serif;
+				text-align: center;
+				line-height: normal;
+				cursor: default;
+			}
+
+			.element:hover {
+				box-shadow: 0px 0px 12px rgba(0,255,255,0.75);
+				border: 1px solid rgba(127,255,255,0.75);
+			}
+
+				.element .number {
+					position: absolute;
+					top: 20px;
+					right: 20px;
+					font-size: 12px;
+					color: rgba(127,255,255,0.75);
+				}
+
+				.element .symbol {
+					position: absolute;
+					top: 40px;
+					left: 0px;
+					right: 0px;
+					font-size: 60px;
+					font-weight: bold;
+					color: rgba(255,255,255,0.75);
+					text-shadow: 0 0 10px rgba(0,255,255,0.95);
+				}
+
+				.element .details {
+					position: absolute;
+					bottom: 15px;
+					left: 0px;
+					right: 0px;
+					font-size: 12px;
+					color: rgba(127,255,255,0.75);
+				}
+		</style>
+	</head>
+	<body>
+		<div id="container"></div>
+		<script src="//wow.techbrood.com/libs/three.r73.js">
+		
+		import * as THREE from '/build/three.module.js';
+
+		import { TWEEN } from '/three.js-dev/examples/jsm/libs/tween.module.min.js';
+		import { TrackballControls } from '/three.js-dev/examples/jsm/controls/TrackballControls.js';
+		import { CSS3DRenderer, CSS3DObject } from '/three.js-dev/examples/jsm/renderers/CSS3DRenderer.js';
+		</script>
+		<script>
+			var scene = new THREE.Scene();
+			var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
+			var renderer = new THREE.WebGLRenderer();
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			document.body.appendChild( renderer.domElement );
+
+			var geometry = new THREE.BoxGeometry( 1, 2, 0.5 );
+
+		const color=['rgba(0,255,255,0.75)','0x8B00FF','0xFF7F00','0xFFFF00','0x00FF00','rgba(0,255,255,0.75)'];
+		var j=0;
+		for(var i=0;i<12;i+=2,j++){
+			geometry.faces[i].color.setHex(color[j]);
+			geometry.faces[i+1].color.setHex(color[j]);
+		}
+    var material = new THREE.MeshBasicMaterial( { vertexColors: THREE.FaceColors} );
+			var cube = new THREE.Mesh( geometry, material );
+      var cube1 = new THREE.Mesh( geometry, material );
+			scene.add( cube );
+      scene.add( cube1 );
+			camera.position.z = 5;
+      camera.position.y=2;
+      camera.lookAt(scene.position);
+      var angle=0;
+	  var angle1=3;
+	var render = function () {
+		requestAnimationFrame( render );
+		//cube.rotateX(0.01);
+        angle += 0.03;
+		angle1+=0.03;
+        // 圆周运动网格模型x坐标计算  绕转半径400
+        var x = 1 * Math.sin(angle)
+        // 圆周运动网格模型y坐标计算  绕转半径400
+        var z = 1 * Math.cos(angle)
+        // 每次执行render函数，更新需要做圆周运动网格模型Mesh的位置属性
+        cube.position.set(x, 0, z);
+		var x1=1*Math.sin(angle1);
+		var z1=1*Math.cos(angle1);
+		cube1.position.set(x1,0,z1);
+		renderer.render(scene, camera);
+	};
+
+			render();
+		</script>
+	</body>
+</html>
