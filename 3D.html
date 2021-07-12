@@ -90,16 +90,16 @@
 	  var angle1=3;
 	//render function
 	var render = function () {
-	requestAnimationFrame( render );
+		requestAnimationFrame( render );
 		//cube.rotateX(0.01);
-        angle += 0.03;
+        	angle += 0.03;
 		angle1+=0.03;
-        // 圆周运动网格模型x坐标计算  绕转半径400
-        var x = 1 * Math.sin(angle)
-        // 圆周运动网格模型y坐标计算  绕转半径400
-        var z = 1 * Math.cos(angle)
-        // 每次执行render函数，更新需要做圆周运动网格模型Mesh的位置属性
-        cube.position.set(x, 0, z);
+		// 圆周运动网格模型x坐标计算  绕转半径400
+		var x = 1 * Math.sin(angle)
+		// 圆周运动网格模型y坐标计算  绕转半径400
+		var z = 1 * Math.cos(angle)
+		// 每次执行render函数，更新需要做圆周运动网格模型Mesh的位置属性
+		cube.position.set(x, 0, z);
 		var x1=1*Math.sin(angle1);
 		var z1=1*Math.cos(angle1);
 		cube1.position.set(x1,0,z1);
